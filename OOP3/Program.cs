@@ -11,12 +11,17 @@ namespace OOP3
             ICreditManager vehicleCreditManager = new VehicleCreditManager();
             ICreditManager homeCreditManager = new HomeCreditManager();
 
+            ILoggerService databaseLoggerService = new DatabaseLoggerService();
+            ILoggerService fileLoggerService = new FileLoggerService();
+
+            List<ILoggerService> loggers = new List<ILoggerService> { new SmsLoggerService(), new FileLoggerService() };
+
             ApplicationManager applicationManager = new ApplicationManager();
-            //applicationManager.BasvuruYap(consumerCreditManager);
+            applicationManager.BasvuruYap(new VehicleCreditManager(), loggers);
 
-            List<ICreditManager> credits = new List<ICreditManager>() {consumerCreditManager, vehicleCreditManager };
+            List<ICreditManager> credits = new List<ICreditManager>() { consumerCreditManager, vehicleCreditManager };
 
-            applicationManager.KrediOnBilgilendirmesiYap(credits);
+            //applicationManager.KrediOnBilgilendirmesiYap(credits);
         }
     }
 }

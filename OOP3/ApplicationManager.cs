@@ -6,12 +6,16 @@ namespace OOP3
 {
     class ApplicationManager
     {
-        public void BasvuruYap(ICreditManager creditManager)
+        public void BasvuruYap(ICreditManager creditManager, List<ILoggerService> loggerServices)
         {
             //Başvuran bilgilerini değerlendirme
             //
-
+            
             creditManager.Calculate();
+            foreach (var loggerService in loggerServices)
+            {
+                loggerService.Log();
+            }
         }
 
         public void KrediOnBilgilendirmesiYap(List<ICreditManager> credits)
